@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — PyLadies İstanbul</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ── Header ───────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="index.html" class="header-logo" aria-label="PyLadies İstanbul home">
+      <img src="assets/logos/pyladies-wordmark.png" alt="PyLadies" height="32">
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-link" data-i18n="nav_home">Home</a>
+      <a href="education.html" class="nav-link" data-i18n="nav_education">Education</a>
+      <a href="events.html" class="nav-link" data-i18n="nav_events">Events</a>
+      <a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
+    </nav>
+
+    <div class="header-controls">
+      <div class="lang-picker">
+        <button class="lang-trigger" aria-haspopup="listbox" aria-expanded="false">
+          🇬🇧 English <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-menu" role="listbox"></div>
+      </div>
+      <button class="dark-toggle" aria-label="Toggle dark mode">
+        <span class="toggle-knob"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Main ─────────────────────────────────────────────────────── -->
+  <main class="events-main">
+
+    <!-- Upcoming Events -->
+    <section class="ev-section">
+      <div class="section-inner">
+        <h2 class="ev-section-h2">
+          <span class="ev-live-dot" aria-hidden="true"></span>
+          <span data-i18n="ev_upcoming_h2">Upcoming Events</span>
+        </h2>
+        <div class="events-grid" id="upcoming-grid">
+          <!-- populated by events.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Events -->
+    <section class="ev-section ev-section--past">
+      <div class="section-inner">
+        <h2 class="ev-section-h2" data-i18n="ev_past_h2">Past Events</h2>
+        <div class="events-grid" id="past-grid">
+          <!-- populated by events.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Calendar -->
+    <section class="ev-section ev-calendar-section">
+      <div class="section-inner">
+        <h2 class="ev-section-h2" data-i18n="loop_cal_label">Add Google Calendar</h2>
+        <div class="calendar-embed-wrap">
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=c_749ffe4b8b1cc6117b0de0ab77afa46daa3dd10a9bea1d2652a218db92447c77%40group.calendar.google.com&ctz=Europe%2FIstanbul&wkst=2&bgcolor=%23ffffff&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0"
+            style="border:0"
+            width="100%"
+            height="480"
+            frameborder="0"
+            scrolling="no"
+            title="PyLadies İstanbul Calendar"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get in Touch -->
+    <section class="forms-section">
+      <div class="section-inner">
+        <div class="form-card community-form-card">
+          <div class="form-card-header">
+            <span class="form-card-header-icon" aria-hidden="true">💬</span>
+            <div class="form-card-header-text">
+              <h2 class="form-card-title" data-i18n="contact_kicker">Get in Touch</h2>
+              <p class="form-card-desc" data-i18n="form_desc">Have an event idea, feedback, or just want to say hi? We'd love to hear from you.</p>
+            </div>
+          </div>
+          <form id="community-form" novalidate>
+
+            <label class="form-label" data-i18n="form_type_label">Type</label>
+            <select class="form-input form-select" id="form-type">
+              <option value="" disabled selected data-i18n="form_type_placeholder">Select type…</option>
+              <!-- DIKKAT: value degerleri Google Forms'taki secenek metinleriyle
+                   BIREBIR ayni olmak zorunda. Tek harf farki tum gonderimi
+                   sessizce dusurur. Gorunen etiket data-i18n ile cevrilir,
+                   gonderilen deger value'dur. -->
+              <option value="Etkinlik Önerisi / Suggest an Event" data-i18n="form_type_event">Event Suggestion</option>
+              <option value="Geri Bildirim / Share Feedback" data-i18n="form_type_feedback">Feedback</option>
+            </select>
+            <span class="form-error" id="err-type"></span>
+
+            <div class="form-row">
+              <div class="form-col">
+                <label class="form-label" data-i18n="suggest_name_label">Your Name</label>
+                <input class="form-input" id="form-name" type="text" data-i18n="suggest_name_ph" placeholder="Ada">
+                <span class="form-error" id="err-name"></span>
+              </div>
+              <div class="form-col">
+                <label class="form-label" data-i18n="suggest_email_label">Email</label>
+                <input class="form-input" id="form-email" type="email" data-i18n="suggest_email_ph" placeholder="ada@example.com">
+                <span class="form-error" id="err-email"></span>
+              </div>
+            </div>
+
+            <label class="form-label" data-i18n="form_message_label">Your Message</label>
+            <textarea class="form-textarea" id="form-message" rows="5" data-i18n="form_message_ph" placeholder="Tell us your idea or feedback…"></textarea>
+            <span class="form-error" id="err-message"></span>
+
+            <label class="form-checkbox-label">
+              <input type="checkbox" class="form-checkbox" id="form-consent">
+              <span data-i18n="form_consent">I consent to my data being processed on Google infrastructure for community communication purposes.</span>
+            </label>
+            <span class="form-error" id="err-consent"></span>
+
+            <button type="submit" class="btn-primary form-submit-btn" id="form-submit" data-i18n="form_send_btn">Send</button>
+          </form>
+          <div id="community-thanks" hidden class="form-thanks-block">
+            <p>Thank you! We'll review your message soon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Modal ────────────────────────────────────────────────────── -->
+  <div id="event-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Event details">
+    <div class="modal-card">
+      <!-- populated by events.js -->
+    </div>
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logos/pyladies-istanbul.png" alt="PyLadies İstanbul" class="footer-logo">
+        <p class="footer-blurb" data-i18n="footer_tagline">Bringing Python developers together in İstanbul.</p>
+        <p class="footer-free" data-i18n="footer_events_free">PyLadies events are always free to attend.</p>
+      </div>
+      <div class="footer-links">
+        <p class="footer-links-label" data-i18n="footer_links">Quick Links</p>
+        <ul class="footer-links-list">
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="education.html" data-i18n="nav_education">Education</a></li>
+          <li><a href="events.html" data-i18n="nav_events">Events</a></li>
+          <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+          <li><a href="https://pyladies.com/" target="_blank" rel="noopener">PyLadies Global</a></li>
+          <li><a href="https://pyladies.com/CodeOfConduct/" target="_blank" rel="noopener" data-i18n="coc_link">Code of Conduct</a></li>
+        </ul>
+      </div>
+      <div class="footer-socials">
+        <div class="social-icons">
+          <a href="https://instagram.com/pyladiesistanbul" class="social-icon-btn" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://github.com/pyladiesistanbul" class="social-icon-btn" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+          <a href="https://www.linkedin.com/company/pyladies-istanbul" class="social-icon-btn" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+          <a href="https://www.youtube.com/channel/UC7tQ-cKS4-Wk_Dm1e71R5ow" class="social-icon-btn" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="mailto:istanbul@pyladies.com" class="social-icon-btn" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          <a href="https://slackin.pyladies.com/" class="social-icon-btn" aria-label="Slack" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-rights" data-i18n="footer_rights">© 2026 PyLadies İstanbul. All rights reserved.</p>
+    <p class="footer-privacy" data-i18n="footer_privacy">Name and contact information collected through the PyLadies İstanbul website is securely stored on Google Drive using Google Forms infrastructure, solely for community communication and reviewing event suggestions. Your data will never be shared with third parties, and you may request deletion at any time via email.</p>
+  </footer>
+
+  <script src="js/core.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>
